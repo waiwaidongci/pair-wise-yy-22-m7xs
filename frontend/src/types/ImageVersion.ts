@@ -7,4 +7,9 @@ export interface ImageVersion {
   file_path: string;
   capture_at: string;
   note: string;
+  uploaded_by: number;
+  uploaded_by_name: string;
+  archived: boolean;
+  affected: boolean;
+  created_at: string;
 }

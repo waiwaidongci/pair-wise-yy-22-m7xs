@@ -1,1 +1,31 @@
-export const ERROR_MESSAGES = { AUTH_REQUIRED: "missing bearer token", RBAC_DENIED: "role denied", VALIDATION_FAILED: "invalid payload", RATE_LIMITED: "too many requests" };
+export const ERROR_MESSAGES = {
+  AUTH_REQUIRED: "缺少身份信息，请先选择登录身份",
+  RBAC_DENIED: "当前角色没有执行该动作的权限",
+  VALIDATION_FAILED: "表单字段缺失或格式错误",
+  RATE_LIMITED: "请求过于频繁，请稍后再试",
+  RELIC_NOT_FOUND: "文物不存在或已归档",
+  DAMAGE_NOT_FOUND: "病害记录不存在",
+  DAMAGE_NOT_REGISTERED: "病害未登记，无法编制方案",
+  DAMAGE_HAS_ACTIVE_PLAN: "该病害已有一份未结束方案，无法重复编制",
+  DAMAGE_CANNOT_CORRECT: "病害已关闭或被更正，无法再次更正",
+  PLAN_NOT_FOUND: "修复方案不存在",
+  PLAN_ACTIVE_EXISTS: "同一病害只能有一份未结束方案",
+  PLAN_NOT_SUBMITTED: "方案尚未提交审批",
+  PLAN_NOT_APPROVED: "方案审批通过后才能拆解修复步骤",
+  PLAN_ALREADY_PROCESSED: "方案已被其他专家处理，当前状态已变更",
+  PLAN_CONTENT_CHANGED: "方案内容在审批前被修改，已退回编制人重新提交",
+  PLAN_STEPS_INCOMPLETE: "仍有修复步骤未完成",
+  PLAN_IMAGES_INCOMPLETE: "修复前、修复后影像均上传后才能归档",
+  PLAN_ALREADY_ARCHIVED: "方案已归档，无法重复操作",
+  PLAN_NOT_CORRECTABLE: "仅审批通过的方案允许发起更正",
+  PLAN_AFFECTED: "方案已因上游更正失效，不能继续操作",
+  STEP_NOT_FOUND: "修复步骤不存在",
+  STEP_ALREADY_COMPLETED: "该步骤已被其他操作人完成提交",
+  STEP_ORDER_DUPLICATED: "步骤序号重复，请按顺序拆解",
+  IMAGE_NOT_FOUND: "影像不存在",
+  IMAGE_TYPE_CONFLICT: "该方案已存在同类型影像",
+  IMAGE_BEFORE_STEPS_UNFINISHED: "全部步骤完成后才能上传修复后影像",
+  INVALID_STATE: "当前状态不允许该操作"
+} as const;
+
+export type ErrorMessageKey = keyof typeof ERROR_MESSAGES;

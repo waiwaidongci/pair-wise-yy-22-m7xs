@@ -1,5 +1,7 @@
 export interface DamageRecord {
   id: number;
+  damage_no: string;
+  revision_no: number;
   relic_id: number;
   damage_type: string;
   position_desc: string;
@@ -8,4 +10,8 @@ export interface DamageRecord {
   discovered_at: string;
   image_url: string;
   status: string;
+  superseded_by_id: number | null;
+  affected: boolean;
+  created_at: string;
+  updated_at: string;
 }

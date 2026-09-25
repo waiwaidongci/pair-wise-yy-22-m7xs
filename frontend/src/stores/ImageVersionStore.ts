@@ -1,14 +1,5 @@
-import { create } from "zustand";
-import { listImageVersion } from "../api/ImageVersion";
-import type { ImageVersion } from "../types/ImageVersion";
+import { useShallow } from "zustand/react/shallow";
+import { useArchiveStore } from "./ArchiveStore";
 
-type State = { rows: ImageVersion[]; loading: boolean; load: () => Promise<void> };
-
-export const useImageVersionStore = create<State>((set) => ({
-  rows: [],
-  loading: false,
-  async load() {
-    set({ loading: true });
-    set({ rows: await listImageVersion(), loading: false });
-  }
-}));
+export const useImageVersionStore = () =>
+  useArchiveStore(useShallow((state) => ({ rows: state.images, loading: state.loading, load: state.loadAll })));

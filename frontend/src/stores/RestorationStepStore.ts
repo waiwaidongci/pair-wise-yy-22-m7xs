@@ -1,14 +1,5 @@
-import { create } from "zustand";
-import { listRestorationStep } from "../api/RestorationStep";
-import type { RestorationStep } from "../types/RestorationStep";
+import { useShallow } from "zustand/react/shallow";
+import { useArchiveStore } from "./ArchiveStore";
 
-type State = { rows: RestorationStep[]; loading: boolean; load: () => Promise<void> };
-
-export const useRestorationStepStore = create<State>((set) => ({
-  rows: [],
-  loading: false,
-  async load() {
-    set({ loading: true });
-    set({ rows: await listRestorationStep(), loading: false });
-  }
-}));
+export const useRestorationStepStore = () =>
+  useArchiveStore(useShallow((state) => ({ rows: state.steps, loading: state.loading, load: state.loadAll })));

@@ -1,1 +1,25 @@
-export const createDamageRecordDto = (overrides = {}) => ({ id: 1, relic_id: 1, damage_type: "FRAGILE", position_desc: "position desc 1", severity: "severity 1", discovered_by: "discovered by 1", discovered_at: "2026-06-11T09:00:00Z", image_url: "/mock/image_url-1.png", status: "SUBMITTED", ...overrides });
+import type { DamageRecord } from "../models/DamageRecord";
+
+export const createDamageRecordFormDto = (
+  overrides: Partial<DamageRecord> = {}
+): Omit<DamageRecord, "id"> => ({
+  damage_no: "",
+  revision_no: 1,
+  relic_id: 0,
+  damage_type: "",
+  position_desc: "",
+  severity: "MEDIUM",
+  discovered_by: "",
+  discovered_at: "",
+  image_url: "",
+  status: "REGISTERED",
+  superseded_by_id: null,
+  affected: false,
+  created_at: "",
+  updated_at: "",
+  ...overrides
+});
+
+export const createDamageRecordResponseDto = (row: DamageRecord): DamageRecord => ({ ...row });
+
+export const createDamageRecordDto = createDamageRecordFormDto;

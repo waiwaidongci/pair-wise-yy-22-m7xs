@@ -1,1 +1,7 @@
-export type RestorationStepPayload = Record<string, unknown>;
+export interface RestorationStepPayload {
+  technique?: string;
+}
+
+export interface StepCompletePayload {
+  material_used?: string;
+}

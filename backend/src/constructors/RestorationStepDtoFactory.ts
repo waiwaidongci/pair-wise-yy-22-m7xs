@@ -1,1 +1,22 @@
-export const createRestorationStepDto = (overrides = {}) => ({ id: 1, plan_id: 1, step_order: "step order 1", technique: "technique 1", material_used: "material used 1", operator_id: 1, step_status: "SUBMITTED", finished_at: "2026-06-11T09:00:00Z", ...overrides });
+import type { RestorationStep } from "../models/RestorationStep";
+
+export const createRestorationStepFormDto = (
+  overrides: Partial<RestorationStep> = {}
+): Omit<RestorationStep, "id"> => ({
+  plan_id: 0,
+  step_order: 1,
+  technique: "",
+  material_used: null,
+  operator_id: null,
+  operator_name: null,
+  step_status: "PENDING",
+  finished_at: null,
+  affected: false,
+  created_at: "",
+  updated_at: "",
+  ...overrides
+});
+
+export const createRestorationStepResponseDto = (row: RestorationStep): RestorationStep => ({ ...row });
+
+export const createRestorationStepDto = createRestorationStepFormDto;

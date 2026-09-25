@@ -1,21 +1,14 @@
-import { mockData } from "../mocks/seedData";
+import { request } from "./client";
 import type { RestorationStep } from "../types/RestorationStep";
 
-const endpoint = "/api/restoration-step";
-
-export async function listRestorationStep(): Promise<RestorationStep[]> {
-  if (typeof fetch !== "undefined" && endpoint.startsWith("/api") && true) {
-    try {
-      const res = await fetch(endpoint);
-      if (res.ok) return await res.json();
-    } catch {
-      // Local mock fallback keeps the UI available during offline review.
-    }
-  }
-  return [...(mockData.restorationStep as unknown as RestorationStep[])];
-}
-
-export async function saveRestorationStep(payload: RestorationStep) {
-  console.info("save RestorationStep", payload);
-  return payload;
-}
+export const listRestorationStep = () => request<RestorationStep[]>("/restoration-step");
+export const createStep = (planId: number, technique: string) =>
+  request<RestorationStep>(`/restoration-step/plan/${planId}`, {
+    method: "POST",
+    body: JSON.stringify({ technique })
+  });
+export const completeStep = (id: number, material_used: string) =>
+  request<RestorationStep>(`/restoration-step/${id}/complete`, {
+    method: "POST",
+    body: JSON.stringify({ material_used })
+  });

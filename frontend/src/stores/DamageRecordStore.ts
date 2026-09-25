@@ -1,14 +1,5 @@
-import { create } from "zustand";
-import { listDamageRecord } from "../api/DamageRecord";
-import type { DamageRecord } from "../types/DamageRecord";
+import { useShallow } from "zustand/react/shallow";
+import { useArchiveStore } from "./ArchiveStore";
 
-type State = { rows: DamageRecord[]; loading: boolean; load: () => Promise<void> };
-
-export const useDamageRecordStore = create<State>((set) => ({
-  rows: [],
-  loading: false,
-  async load() {
-    set({ loading: true });
-    set({ rows: await listDamageRecord(), loading: false });
-  }
-}));
+export const useDamageRecordStore = () =>
+  useArchiveStore(useShallow((state) => ({ rows: state.damages, loading: state.loading, load: state.loadAll })));

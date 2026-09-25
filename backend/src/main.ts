@@ -10,18 +10,23 @@ import damageRecordRoutes from "./routes/DamageRecordRoutes";
 import restorationPlanRoutes from "./routes/RestorationPlanRoutes";
 import restorationStepRoutes from "./routes/RestorationStepRoutes";
 import imageVersionRoutes from "./routes/ImageVersionRoutes";
+import auditLogRoutes from "./routes/AuditLogRoutes";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(requestLoggerMiddleware);
+app.get("/health", (_req, res) => res.json({ status: "ok", service: "relic-restore" }));
 app.use(authMiddleware);
 app.use(auditLogMiddleware);
-app.get("/health", (_req, res) => res.json({ status: "ok", service: "relic-restore" }));
 app.use("/api/relic-item", relicItemRoutes);
 app.use("/api/damage-record", damageRecordRoutes);
 app.use("/api/restoration-plan", restorationPlanRoutes);
 app.use("/api/restoration-step", restorationStepRoutes);
 app.use("/api/image-version", imageVersionRoutes);
+app.use("/api/audit-log", auditLogRoutes);
 app.use(errorHandlerMiddleware);
 app.listen(config.port, () => console.log("relic-restore backend listening on", config.port));
+
+process.on("unhandledRejection", (reason) => console.error("[unhandledRejection]", reason));
+process.on("uncaughtException", (reason) => console.error("[uncaughtException]", reason));
