@@ -1,16 +1,17 @@
 import type { ImageVersion } from "../types/ImageVersion";
+import type { ImageUploadPayload } from "../api/ImageVersion";
 
-export const createDefaultImageVersion = (overrides: Partial<ImageVersion> = {}): ImageVersion => ({
-  id: 1 as never,
-  relic_id: 1 as never,
-  plan_id: 1 as never,
-  version_no: "version no 1" as never,
-  image_type: "FRAGILE" as never,
-  file_path: "file path 1" as never,
-  capture_at: "2026-06-11T09:00:00Z" as never,
-  note: "note 1" as never,
+/** 上传影像表单：修复前 / 修复后，路径模拟文件上传后的归档地址 */
+export const createImageVersionForm = (
+  imageType: "BEFORE" | "AFTER",
+  overrides: Partial<ImageUploadPayload> = {}
+): ImageUploadPayload => ({
+  image_type: imageType,
+  file_path: "",
+  note: "",
   ...overrides
 });
 
-export const createImageVersionForm = createDefaultImageVersion;
-export const createImageVersionResponse = createDefaultImageVersion;
+export const createImageVersionResponse = (row: ImageVersion): ImageVersion => ({ ...row });
+
+export const createDefaultImageVersion = createImageVersionForm;

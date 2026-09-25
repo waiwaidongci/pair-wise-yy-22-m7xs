@@ -1,16 +1,29 @@
 import type { RelicItem } from "../types/RelicItem";
+import type { RelicCondition } from "../constants/RelicCondition";
 
-export const createDefaultRelicItem = (overrides: Partial<RelicItem> = {}): RelicItem => ({
-  id: 1 as never,
-  relic_code: "relic code 1" as never,
-  name: "name 1" as never,
-  era: "era 1" as never,
-  material: "material 1" as never,
-  collection_level: "LOW" as never,
-  storage_location: "storage location 1" as never,
-  current_condition: "current condition 1" as never,
+export interface RelicItemFormValues {
+  relic_code: string;
+  name: string;
+  era: string;
+  material: string;
+  collection_level: string;
+  storage_location: string;
+  current_condition: RelicCondition | string;
+}
+
+/** 藏品建档表单默认值 */
+export const createRelicItemForm = (overrides: Partial<RelicItemFormValues> = {}): RelicItemFormValues => ({
+  relic_code: "",
+  name: "",
+  era: "",
+  material: "",
+  collection_level: "",
+  storage_location: "",
+  current_condition: "STABLE",
   ...overrides
 });
 
-export const createRelicItemForm = createDefaultRelicItem;
-export const createRelicItemResponse = createDefaultRelicItem;
+/** 详情响应对象（页面统一从该构造器取得标准结构，不散写字段） */
+export const createRelicItemResponse = (row: RelicItem): RelicItem => ({ ...row });
+
+export const createDefaultRelicItem = createRelicItemForm;

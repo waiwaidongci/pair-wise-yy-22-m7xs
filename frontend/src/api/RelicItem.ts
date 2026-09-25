@@ -1,21 +1,19 @@
-import { mockData } from "../mocks/seedData";
+import { request } from "./client";
 import type { RelicItem } from "../types/RelicItem";
+import type { RelicDossier, AuditLogEntry } from "../types/Dossier";
 
-const endpoint = "/api/relic-item";
-
-export async function listRelicItem(): Promise<RelicItem[]> {
-  if (typeof fetch !== "undefined" && endpoint.startsWith("/api") && true) {
-    try {
-      const res = await fetch(endpoint);
-      if (res.ok) return await res.json();
-    } catch {
-      // Local mock fallback keeps the UI available during offline review.
-    }
-  }
-  return [...(mockData.relicItem as unknown as RelicItem[])];
+export function listRelicItem(): Promise<RelicItem[]> {
+  return request<RelicItem[]>("/relic-item");
 }
 
-export async function saveRelicItem(payload: RelicItem) {
-  console.info("save RelicItem", payload);
-  return payload;
+export function getRelicDossier(id: number): Promise<RelicDossier> {
+  return request<RelicDossier>(`/relic-item/${id}/dossier`);
+}
+
+export function createRelicItem(payload: Partial<RelicItem>): Promise<RelicItem> {
+  return request<RelicItem>("/relic-item", { method: "POST", body: payload });
+}
+
+export function listAuditLogs(): Promise<AuditLogEntry[]> {
+  return request<AuditLogEntry[]>("/relic-item/audit-logs");
 }

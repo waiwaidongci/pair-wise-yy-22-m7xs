@@ -1,165 +1,33 @@
+/**
+ * 本地种子数据：与后端 backend/src/seed.ts 的真实流程场景一致。
+ * 页面默认通过 /api 直连后端；仅在后端不可达时作为离线评审兜底。
+ */
 export const mockData = {
-  "relicItem": [
-    {
-      "id": 1,
-      "relic_code": "relic code 1",
-      "name": "name 1",
-      "era": "era 1",
-      "material": "material 1",
-      "collection_level": "LOW",
-      "storage_location": "storage location 1",
-      "current_condition": "current condition 1"
-    },
-    {
-      "id": 2,
-      "relic_code": "relic code 2",
-      "name": "name 2",
-      "era": "era 2",
-      "material": "material 2",
-      "collection_level": "MEDIUM",
-      "storage_location": "storage location 2",
-      "current_condition": "current condition 2"
-    },
-    {
-      "id": 3,
-      "relic_code": "relic code 3",
-      "name": "name 3",
-      "era": "era 3",
-      "material": "material 3",
-      "collection_level": "HIGH",
-      "storage_location": "storage location 3",
-      "current_condition": "current condition 3"
-    }
+  relicItem: [
+    { id: 1, relic_code: "WW-2026-001", name: "商·饕餮纹青铜鼎", era: "商代", material: "青铜", collection_level: "一级", storage_location: "青铜器库房 A-12", current_condition: "DAMAGED", updated_at: "2026-09-10T09:10:00+08:00" },
+    { id: 2, relic_code: "WW-2026-002", name: "宋·青瓷莲瓣纹瓶", era: "宋代", material: "瓷", collection_level: "二级", storage_location: "陶瓷库房 B-03", current_condition: "DAMAGED", updated_at: "2026-09-06T14:20:00+08:00" },
+    { id: 3, relic_code: "WW-2026-003", name: "唐·彩绘陶仕女俑", era: "唐代", material: "彩绘陶", collection_level: "一级", storage_location: "陶质库房 C-07", current_condition: "IN_RESTORATION", updated_at: "2026-09-18T08:30:00+08:00" },
+    { id: 4, relic_code: "WW-2026-004", name: "明·绢本花鸟册页", era: "明代", material: "绢本设色", collection_level: "三级", storage_location: "书画库房 D-02", current_condition: "STABLE", updated_at: "2026-09-02T16:00:00+08:00" }
   ],
-  "damageRecord": [
-    {
-      "id": 1,
-      "relic_id": 1,
-      "damage_type": "FRAGILE",
-      "position_desc": "position desc 1",
-      "severity": "severity 1",
-      "discovered_by": "discovered by 1",
-      "discovered_at": "2026-06-11T09:00:00Z",
-      "image_url": "/mock/image_url-1.png",
-      "status": "SUBMITTED"
-    },
-    {
-      "id": 2,
-      "relic_id": 2,
-      "damage_type": "DAMAGED",
-      "position_desc": "position desc 2",
-      "severity": "severity 2",
-      "discovered_by": "discovered by 2",
-      "discovered_at": "2026-06-12T09:00:00Z",
-      "image_url": "/mock/image_url-2.png",
-      "status": "APPROVED"
-    },
-    {
-      "id": 3,
-      "relic_id": 3,
-      "damage_type": "IN_RESTORATION",
-      "position_desc": "position desc 3",
-      "severity": "severity 3",
-      "discovered_by": "discovered by 3",
-      "discovered_at": "2026-06-13T09:00:00Z",
-      "image_url": "/mock/image_url-3.png",
-      "status": "DRAFT"
-    }
+  damageRecord: [
+    { id: 1, damage_no: "BH-2026-001", revision: 1, revised_from_id: null, relic_id: 1, damage_type: "点状锈蚀", position_desc: "鼎腹外侧近口沿三处绿色粉状锈", severity: "HIGH", discovered_by: "李慕白", discovered_at: "2026-09-10T09:00:00+08:00", image_url: "/archive/ww-001/damage.jpg", status: "REGISTERED", corrected_reason: null, affected: false, affected_reason: null, created_at: "2026-09-10T09:05:00+08:00", updated_at: "2026-09-10T09:05:00+08:00" },
+    { id: 2, damage_no: "BH-2026-002", revision: 1, revised_from_id: null, relic_id: 2, damage_type: "冲缝兼釉层剥落", position_desc: "腹部至圈足纵向冲缝约12cm", severity: "CRITICAL", discovered_by: "李慕白", discovered_at: "2026-09-05T10:00:00+08:00", image_url: "/archive/ww-002/damage.jpg", status: "TREATING", corrected_reason: null, affected: false, affected_reason: null, created_at: "2026-09-05T10:30:00+08:00", updated_at: "2026-09-12T11:00:00+08:00" },
+    { id: 3, damage_no: "BH-2026-003", revision: 1, revised_from_id: null, relic_id: 3, damage_type: "彩绘层起甲", position_desc: "发髻及肩部起甲卷曲约15%", severity: "HIGH", discovered_by: "王栖梧", discovered_at: "2026-09-08T15:00:00+08:00", image_url: "/archive/ww-003/damage.jpg", status: "TREATING", corrected_reason: null, affected: false, affected_reason: null, created_at: "2026-09-08T15:20:00+08:00", updated_at: "2026-09-16T09:00:00+08:00" },
+    { id: 4, damage_no: "BH-2026-004", revision: 1, revised_from_id: null, relic_id: 4, damage_type: "折痕断裂", position_desc: "第三开对折处横向断裂", severity: "MEDIUM", discovered_by: "陈兰", discovered_at: "2026-08-25T11:00:00+08:00", image_url: "/archive/ww-004/damage.jpg", status: "CLOSED", corrected_reason: null, affected: false, affected_reason: null, created_at: "2026-08-25T11:30:00+08:00", updated_at: "2026-09-02T15:30:00+08:00" }
   ],
-  "restorationPlan": [
-    {
-      "id": 1,
-      "relic_id": 1,
-      "damage_record_id": 1,
-      "plan_title": "plan title 1",
-      "method": "method 1",
-      "risk_assessment": "risk assessment 1",
-      "approval_status": "SUBMITTED",
-      "owner_id": 1
-    },
-    {
-      "id": 2,
-      "relic_id": 2,
-      "damage_record_id": 2,
-      "plan_title": "plan title 2",
-      "method": "method 2",
-      "risk_assessment": "risk assessment 2",
-      "approval_status": "APPROVED",
-      "owner_id": 2
-    },
-    {
-      "id": 3,
-      "relic_id": 3,
-      "damage_record_id": 3,
-      "plan_title": "plan title 3",
-      "method": "method 3",
-      "risk_assessment": "risk assessment 3",
-      "approval_status": "DRAFT",
-      "owner_id": 3
-    }
+  restorationPlan: [
+    { id: 1, plan_no: "FA-2026-002-01", plan_revision: 1, relic_id: 2, damage_record_id: 2, damage_no: "BH-2026-002", plan_title: "青瓷瓶冲缝加固与釉面回贴方案", method: "乙醇清理断面，环氧树脂注浆粘合", risk_assessment: "注浆存在渗色风险", approval_status: "SUBMITTED", owner_id: 1, author: "李慕白", submitted_content_hash: null, submitted_at: "2026-09-12T11:00:00+08:00", reviewer: null, reviewed_at: null, review_comment: null, archived_at: null, affected: false, affected_reason: null, revised_from_id: null, version: 2, created_at: "2026-09-11T16:00:00+08:00", updated_at: "2026-09-12T11:00:00+08:00" },
+    { id: 2, plan_no: "FA-2026-003-01", plan_revision: 1, relic_id: 3, damage_record_id: 3, damage_no: "BH-2026-003", plan_title: "彩绘陶仕女俑起甲回贴加固方案", method: "3% B72 丙酮溶液注射回贴", risk_assessment: "丙酮挥发快，分区分次", approval_status: "APPROVED", owner_id: 1, author: "李慕白", submitted_content_hash: null, submitted_at: "2026-09-15T10:00:00+08:00", reviewer: "周慎之", reviewed_at: "2026-09-16T09:00:00+08:00", review_comment: "同意", archived_at: null, affected: false, affected_reason: null, revised_from_id: null, version: 3, created_at: "2026-09-14T09:30:00+08:00", updated_at: "2026-09-16T09:00:00+08:00" },
+    { id: 3, plan_no: "FA-2026-004-01", plan_revision: 1, relic_id: 4, damage_record_id: 4, damage_no: "BH-2026-004", plan_title: "绢本册页断裂托裱修复方案", method: "拆裱清洗脱酸，同质绢丝补缀", risk_assessment: "揭裱掉色风险", approval_status: "ARCHIVED", owner_id: 2, author: "王栖梧", submitted_content_hash: null, submitted_at: "2026-08-27T09:00:00+08:00", reviewer: "周慎之", reviewed_at: "2026-08-28T10:00:00+08:00", review_comment: "同意", archived_at: "2026-09-02T15:30:00+08:00", affected: false, affected_reason: null, revised_from_id: null, version: 5, created_at: "2026-08-26T14:00:00+08:00", updated_at: "2026-09-02T15:30:00+08:00" }
   ],
-  "restorationStep": [
-    {
-      "id": 1,
-      "plan_id": 1,
-      "step_order": "step order 1",
-      "technique": "technique 1",
-      "material_used": "material used 1",
-      "operator_id": 1,
-      "step_status": "SUBMITTED",
-      "finished_at": "2026-06-11T09:00:00Z"
-    },
-    {
-      "id": 2,
-      "plan_id": 2,
-      "step_order": "step order 2",
-      "technique": "technique 2",
-      "material_used": "material used 2",
-      "operator_id": 2,
-      "step_status": "APPROVED",
-      "finished_at": "2026-06-12T09:00:00Z"
-    },
-    {
-      "id": 3,
-      "plan_id": 3,
-      "step_order": "step order 3",
-      "technique": "technique 3",
-      "material_used": "material used 3",
-      "operator_id": 3,
-      "step_status": "DRAFT",
-      "finished_at": "2026-06-13T09:00:00Z"
-    }
+  restorationStep: [
+    { id: 1, plan_id: 2, step_order: 1, technique: "表面除尘清理", material_used: "软毛刷、洗耳球", operator_id: 2, operator: "王栖梧", step_status: "FINISHED", finished_at: "2026-09-18T11:30:00+08:00", affected: false, affected_reason: null, version: 1, created_at: "2026-09-16T10:00:00+08:00", updated_at: "2026-09-18T11:30:00+08:00" },
+    { id: 2, plan_id: 2, step_order: 2, technique: "起甲彩绘注射回贴", material_used: "3% B72 丙酮溶液", operator_id: 1, operator: "李慕白", step_status: "FINISHED", finished_at: "2026-09-20T17:00:00+08:00", affected: false, affected_reason: null, version: 1, created_at: "2026-09-16T10:00:00+08:00", updated_at: "2026-09-20T17:00:00+08:00" },
+    { id: 3, plan_id: 2, step_order: 3, technique: "随色补全作旧", material_used: "矿物颜料、明胶", operator_id: null, operator: null, step_status: "PENDING", finished_at: null, affected: false, affected_reason: null, version: 0, created_at: "2026-09-16T10:00:00+08:00", updated_at: "2026-09-16T10:00:00+08:00" }
   ],
-  "imageVersion": [
-    {
-      "id": 1,
-      "relic_id": 1,
-      "plan_id": 1,
-      "version_no": "version no 1",
-      "image_type": "FRAGILE",
-      "file_path": "file path 1",
-      "capture_at": "2026-06-11T09:00:00Z",
-      "note": "note 1"
-    },
-    {
-      "id": 2,
-      "relic_id": 2,
-      "plan_id": 2,
-      "version_no": "version no 2",
-      "image_type": "DAMAGED",
-      "file_path": "file path 2",
-      "capture_at": "2026-06-12T09:00:00Z",
-      "note": "note 2"
-    },
-    {
-      "id": 3,
-      "relic_id": 3,
-      "plan_id": 3,
-      "version_no": "version no 3",
-      "image_type": "IN_RESTORATION",
-      "file_path": "file path 3",
-      "capture_at": "2026-06-13T09:00:00Z",
-      "note": "note 3"
-    }
+  imageVersion: [
+    { id: 1, relic_id: 3, plan_id: 2, plan_no: "FA-2026-003-01", version_no: 1, image_type: "BEFORE", file_path: "/archive/ww-003/before-v1.jpg", capture_at: "2026-09-17T09:00:00+08:00", note: "回贴前", uploaded_by: "王栖梧", archived: "ACTIVE", archived_at: null, affected: false, affected_reason: null, created_at: "2026-09-17T09:30:00+08:00" },
+    { id: 2, relic_id: 4, plan_id: 3, plan_no: "FA-2026-004-01", version_no: 1, image_type: "BEFORE", file_path: "/archive/ww-004/before-v1.jpg", capture_at: "2026-08-26T10:00:00+08:00", note: "修复前", uploaded_by: "王栖梧", archived: "ARCHIVED", archived_at: "2026-09-02T15:30:00+08:00", affected: false, affected_reason: null, created_at: "2026-08-26T10:30:00+08:00" },
+    { id: 3, relic_id: 4, plan_id: 3, plan_no: "FA-2026-004-01", version_no: 2, image_type: "AFTER", file_path: "/archive/ww-004/after-v2.jpg", capture_at: "2026-09-02T15:00:00+08:00", note: "托裱完成", uploaded_by: "王栖梧", archived: "ARCHIVED", archived_at: "2026-09-02T15:30:00+08:00", affected: false, affected_reason: null, created_at: "2026-09-02T15:10:00+08:00" }
   ]
 } as const;

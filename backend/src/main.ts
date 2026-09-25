@@ -10,6 +10,11 @@ import damageRecordRoutes from "./routes/DamageRecordRoutes";
 import restorationPlanRoutes from "./routes/RestorationPlanRoutes";
 import restorationStepRoutes from "./routes/RestorationStepRoutes";
 import imageVersionRoutes from "./routes/ImageVersionRoutes";
+import { db } from "./database/inMemoryDb";
+import { seed } from "./seed";
+
+// 装载本地种子数据（生产环境替换为 Prisma/PostgreSQL 实现）
+db.load(seed);
 
 const app = express();
 app.use(cors());
@@ -24,4 +29,5 @@ app.use("/api/restoration-plan", restorationPlanRoutes);
 app.use("/api/restoration-step", restorationStepRoutes);
 app.use("/api/image-version", imageVersionRoutes);
 app.use(errorHandlerMiddleware);
+
 app.listen(config.port, () => console.log("relic-restore backend listening on", config.port));

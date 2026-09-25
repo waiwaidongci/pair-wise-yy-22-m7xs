@@ -7,4 +7,5 @@ export interface RelicItem {
   collection_level: string;
   storage_location: string;
   current_condition: string;
+  updated_at: string;
 }

@@ -1,3 +1,11 @@
-export function StatCard({ label, value }: { label: string; value: string | number }) {
-  return <div className="stat"><span>{label}</span><strong>{value}</strong></div>;
+export function StatCard({ label, value, hint }: { label: string; value: string | number; hint?: string }) {
+  return (
+    <div className="stat">
+      <span>{label}</span>
+      <strong>
+        {value}
+        {hint ? <em>{hint}</em> : null}
+      </strong>
+    </div>
+  );
 }

@@ -1,16 +1,15 @@
 import type { RestorationStep } from "../types/RestorationStep";
+import type { StepCreatePayload } from "../api/RestorationStep";
 
-export const createDefaultRestorationStep = (overrides: Partial<RestorationStep> = {}): RestorationStep => ({
-  id: 1 as never,
-  plan_id: 1 as never,
-  step_order: "step order 1" as never,
-  technique: "technique 1" as never,
-  material_used: "material used 1" as never,
-  operator_id: 1 as never,
-  step_status: "SUBMITTED" as never,
-  finished_at: "2026-06-11T09:00:00Z" as never,
+/** 拆步骤表单：记录工序与材料；操作人/完成时间在“完成步骤”时回写 */
+export const createRestorationStepForm = (
+  overrides: Partial<StepCreatePayload> = {}
+): StepCreatePayload => ({
+  technique: "",
+  material_used: "",
   ...overrides
 });
 
-export const createRestorationStepForm = createDefaultRestorationStep;
-export const createRestorationStepResponse = createDefaultRestorationStep;
+export const createRestorationStepResponse = (row: RestorationStep): RestorationStep => ({ ...row });
+
+export const createDefaultRestorationStep = createRestorationStepForm;

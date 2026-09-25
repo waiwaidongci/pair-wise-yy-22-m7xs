@@ -1,16 +1,29 @@
 import type { RestorationPlan } from "../types/RestorationPlan";
+import type { PlanCreatePayload, PlanUpdatePayload } from "../api/RestorationPlan";
 
-export const createDefaultRestorationPlan = (overrides: Partial<RestorationPlan> = {}): RestorationPlan => ({
-  id: 1 as never,
-  relic_id: 1 as never,
-  damage_record_id: 1 as never,
-  plan_title: "plan title 1" as never,
-  method: "method 1" as never,
-  risk_assessment: "risk assessment 1" as never,
-  approval_status: "SUBMITTED" as never,
-  owner_id: 1 as never,
+/** 方案编制表单：从病害发起，编号沿用病害编号由后端生成 */
+export const createRestorationPlanForm = (
+  damageRecordId: number,
+  overrides: Partial<PlanCreatePayload> = {}
+): PlanCreatePayload => ({
+  damage_record_id: damageRecordId,
+  plan_title: "",
+  method: "",
+  risk_assessment: "",
   ...overrides
 });
 
-export const createRestorationPlanForm = createDefaultRestorationPlan;
-export const createRestorationPlanResponse = createDefaultRestorationPlan;
+/** 方案编辑/更正表单：带出当前内容 */
+export const createRestorationPlanEditForm = (
+  plan: RestorationPlan,
+  overrides: Partial<PlanUpdatePayload> = {}
+): PlanUpdatePayload & { corrected_reason?: string } => ({
+  plan_title: plan.plan_title,
+  method: plan.method,
+  risk_assessment: plan.risk_assessment,
+  ...overrides
+});
+
+export const createRestorationPlanResponse = (row: RestorationPlan): RestorationPlan => ({ ...row });
+
+export const createDefaultRestorationPlan = createRestorationPlanForm;
